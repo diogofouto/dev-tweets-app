@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import TimeLineTweet from './TimeLineTweet';
 
 const Timeline = ({ data }) => {
@@ -13,7 +13,7 @@ const Timeline = ({ data }) => {
             data={data}
             renderItem={ ({ item }) => {
                 return (
-                    <Text>{item.user} - {item.text}</Text>
+                    <TimeLineTweet name={item.user} message={item.text}/>
                 );
             } }
         />

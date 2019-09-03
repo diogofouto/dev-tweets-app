@@ -107,7 +107,7 @@ const HomeScreen = () => {
 
     return (
         <View>
-            {/* {errorMessage ? <Text>{errorMessage}</Text> : null} */}
+            {/*{errorMessage ? <Text>{errorMessage}</Text> : null}*/}
             <Timeline 
                 data={testData}
             />

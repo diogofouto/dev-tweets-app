@@ -1,16 +1,16 @@
 import React from "react";
 import { Card, CardItem, Text, Body } from "native-base";
 
-const TimeLineTweet = () => {
+const TimeLineTweet = ({ name, message }) => {
     return (
           <Card>
             <CardItem header button onPress={() => alert("This is Card Header")}>
-              <Text>NativeBase</Text>
+              <Text>{name}</Text>
             </CardItem>
             <CardItem button onPress={() => alert("This is Card Body")}>
               <Body>
                 <Text>
-                  Click on any carditem
+                  {message}
                 </Text>
               </Body>
             </CardItem>
