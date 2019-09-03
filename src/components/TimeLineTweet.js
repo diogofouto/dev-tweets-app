@@ -1,31 +1,30 @@
 import React from "react";
-import { StyleSheet } from 'react-native';
-import { Card, CardItem, Text, Body } from "native-base";
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const TimeLineTweet = ({ name, message }) => {
     return (
-          <Card style={styles.cardStyle}>
-            <CardItem header button onPress={() => alert("This is Card Header")}>
-              <Text>{name}</Text>
-            </CardItem>
-            <CardItem button onPress={() => alert("This is Card Body")}>
-              <Body>
-                <Text>
-                  {message}
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem footer button onPress={() => alert("This is Card Footer")}>
-              <Text>GeekyAnts</Text>
-            </CardItem>
-          </Card>
+      <TouchableOpacity style={styles.cardStyle}>
+        <Text>{name}</Text>
+        <Text>{message}</Text>
+      </TouchableOpacity>
     );
   }
 
   const styles = StyleSheet.create({
     cardStyle: {
-      margin: 15,
-      backgroundColor: 'red'
+      padding: 10,
+      height: 120,
+      borderRadius: 15,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.20,
+      shadowRadius: 1.41,
+      elevation: 2, 
+      flex: 1,
+      marginBottom: 20
     }
   });
 

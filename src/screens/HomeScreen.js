@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Timeline from '../components/Timeline';
 import useRetrieveTweets from '../hooks/useRetrieveTweets';
 
@@ -106,7 +106,7 @@ const HomeScreen = () => {
     ];
 
     return (
-        <View>
+        <View style={styles.viewStyle}>
             {/*{errorMessage ? <Text>{errorMessage}</Text> : null}*/}
             <Timeline 
                 data={testData}
@@ -114,5 +114,12 @@ const HomeScreen = () => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    viewStyle: {
+        marginHorizontal: 15,
+        marginTop: 15
+    }
+})
 
 export default HomeScreen;
