@@ -1,9 +1,10 @@
 import React from "react";
+import { StyleSheet } from 'react-native';
 import { Card, CardItem, Text, Body } from "native-base";
 
 const TimeLineTweet = ({ name, message }) => {
     return (
-          <Card>
+          <Card style={styles.cardStyle}>
             <CardItem header button onPress={() => alert("This is Card Header")}>
               <Text>{name}</Text>
             </CardItem>
@@ -20,5 +21,12 @@ const TimeLineTweet = ({ name, message }) => {
           </Card>
     );
   }
+
+  const styles = StyleSheet.create({
+    cardStyle: {
+      margin: 15,
+      backgroundColor: 'red'
+    }
+  });
 
   export default TimeLineTweet;
