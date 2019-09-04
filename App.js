@@ -10,11 +10,13 @@ const navigator = createStackNavigator({
   initialRouteName: 'Home',
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#1b1c51',
+      backgroundColor: '#1b1c51'
     },
     headerTintColor: '#eb5647',
     headerTitleStyle: {
       fontWeight: 'bold',
+      textAlign: "center", 
+      flex:1 
     },
     title: 'devTweets'
   }
