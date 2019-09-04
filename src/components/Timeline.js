@@ -1,19 +1,21 @@
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
-import TimeLineTweet from './TimeLineTweet';
+import { FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import TweetCard from './TweetCard';
 
-const Timeline = ({ data }) => {
-    // data = [ 
-    // {client_msg_id: '...', type: '...', text: '...', user: '...',  ts: '...', team: '...'},
-    // ... ]
-
+const Timeline = ({ data, navigation }) => {
     return (
         <FlatList
-            keyExtractor={ tweet => tweet.client_msg_id}
             data={data}
+            keyExtractor={ tweet => tweet.client_msg_id}
             renderItem={ ({ item }) => {
-                return (
-                    <TimeLineTweet name={item.user} message={item.text}/>
+                return ( 
+                    <TouchableOpacity onPress={() => navigation.navigate('Tweet')}>
+                        <TweetCard
+                            name={item.user}
+                            message={item.text}
+                        />
+                    </TouchableOpacity>
                 );
             } }
         />
@@ -22,4 +24,4 @@ const Timeline = ({ data }) => {
 
 const styles = StyleSheet.create({});
 
-export default Timeline;
+export default withNavigation(Timeline);

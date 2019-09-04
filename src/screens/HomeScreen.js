@@ -117,8 +117,7 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
     viewStyle: {
-        marginHorizontal: 15,
-        marginTop: 15
+        margin:12
     }
 })
 
