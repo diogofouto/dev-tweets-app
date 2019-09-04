@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Timeline from '../components/Timeline';
-import useRetrieveTweets from '../hooks/useRetrieveTweets';
+import useApi from '../hooks/useApi';
 
 const HomeScreen = () => {
-    //const [searchApi, tweets, errorMessage] = useRetrieveTweets();
+    //const [searchApi, tweets, errorMessage] = useApi();
 
     const testData =  [
         {
@@ -119,6 +119,6 @@ const styles = StyleSheet.create({
     viewStyle: {
         margin:12
     }
-})
+});
 
 export default HomeScreen;

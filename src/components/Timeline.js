@@ -10,10 +10,12 @@ const Timeline = ({ data, navigation }) => {
             keyExtractor={ tweet => tweet.client_msg_id}
             renderItem={ ({ item }) => {
                 return ( 
-                    <TouchableOpacity onPress={() => navigation.navigate('Tweet')}>
+                    <TouchableOpacity onPress={() =>
+                        navigation.navigate('Tweet', {user: item.user, message: item.text})
+                        }>
                         <TweetCard
                             name={item.user}
-                            message={item.text}
+                            message={item.text.split('\n')[0]}
                         />
                     </TouchableOpacity>
                 );
