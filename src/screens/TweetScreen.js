@@ -1,26 +1,23 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Card, CardItem, Body } from 'native-base';
+import TweetCard from '../components/TweetCard';
 
 const TweetScreen = ({ navigation }) => {
-    const user = navigation.getParam('user');
+    const profilePhoto = navigation.getParam('profilePhoto');
+    const name = navigation.getParam('name');
     const message = navigation.getParam('message');
+    const project = navigation.getParam('project');
+    const date = navigation.getParam('date');
 
     return (
         <View>
-            <Card>
-                <CardItem header bordered>
-                    <Text>{user}</Text>
-                </CardItem>
-                <CardItem bordered>
-                    <Body>
-                        <Text>{message}</Text>
-                    </Body>
-                </CardItem>
-                <CardItem footer bordered>
-                    <Text>Betacode</Text>
-                </CardItem>
-            </Card>
+            <TweetCard
+                profilePhoto={profilePhoto}
+                name={name}
+                message={message}
+                project={project}
+                date={date}
+            />
         </View>
     );
 };
