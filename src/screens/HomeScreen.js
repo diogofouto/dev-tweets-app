@@ -7,13 +7,12 @@ import getMessages from '../redux/actions/getMessages';
 const HomeScreen = () => {
 
     const dispatch = useDispatch();
-    useEffect( () => dispatch(getMessages), []);
+    useEffect( () => dispatch(getMessages()), []);
     const messages = useSelector(state => state.storeMessages.messages);
 
     return (
         <View style={styles.viewMainStyle}>
             <View style={styles.viewSecStyle}>
-                {/*errorMessage ? <Text>{errorMessage}</Text> : null*/}
                 <Timeline 
                     data={messages}
                 />

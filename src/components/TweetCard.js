@@ -7,7 +7,7 @@ const TweetCard = ({ profilePhoto, name, message, project, date }) => {
       <Card>
         <CardItem header bordered>
           <Left>
-            <Thumbnail style={styles.thumbnailStyle} source={{uri: profilePhoto}} />
+            {/* <Thumbnail style={styles.thumbnailStyle} source={{uri: profilePhoto}} /> */}
             <Body>
               <Text style={styles.textStyle}>{name}</Text>
             </Body>

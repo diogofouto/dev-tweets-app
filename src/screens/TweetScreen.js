@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import TweetCard from '../components/TweetCard';
 
 const TweetScreen = ({ navigation }) => {
-    const profilePhoto = navigation.getParam('profilePhoto');
+    //const profilePhoto = navigation.getParam('profilePhoto');
     const name = navigation.getParam('name');
     const message = navigation.getParam('message');
     const project = navigation.getParam('project');
@@ -12,7 +12,7 @@ const TweetScreen = ({ navigation }) => {
     return (
         <View>
             <TweetCard
-                profilePhoto={profilePhoto}
+                //profilePhoto={profilePhoto}
                 name={name}
                 message={message}
                 project={project}
