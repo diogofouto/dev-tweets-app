@@ -15,7 +15,7 @@ const Timeline = ({ data, navigation }) => {
                             {//profilePhoto: item.profilePhoto, 
                                 name: item.name, 
                                 message: item.message,
-                                project: item.message.split('\n')[0],
+                                project: item.project,
                                 date: item.date
                             })
                         }>
@@ -23,7 +23,7 @@ const Timeline = ({ data, navigation }) => {
                             //profilePhoto={item.profilePhoto}
                             name={item.name}
                             message={item.message}
-                            project={item.message.split('\n')[0]}
+                            project={item.project}
                             date={item.date}
                         />
                     </TouchableOpacity>

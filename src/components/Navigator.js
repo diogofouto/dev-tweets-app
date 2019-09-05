@@ -12,13 +12,13 @@ const navigator = createStackNavigator({
     headerStyle: {
       backgroundColor: '#1b1c51'
     },
-    headerTintColor: '#eb5647',
+    headerTintColor: 'white',
     headerTitleStyle: {
       fontWeight: 'bold',
       textAlign: "center", 
       flex:1 
     },
-    title: 'devTweets'
+    title: 'Betacode'
   }
 });
 

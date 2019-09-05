@@ -12,11 +12,11 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.viewMainStyle}>
-            <View style={styles.viewSecStyle}>
+            {/* <View style={styles.viewSecStyle}> */}
                 <Timeline 
                     data={messages}
                 />
-            </View>
+            {/* </View> */}
         </View>
     );
 };
@@ -33,4 +33,3 @@ const styles = StyleSheet.create({
 export default HomeScreen;
 
 //roxo: 1b1c51
-//orange: eb5647

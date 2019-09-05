@@ -5,13 +5,20 @@ import { endpoint, token, channel } from '../../constants';
 const mapMessages = (messages) => {
     mappedMessages = [];
 
-    messages.forEach(item => {
+    messages.forEach(tweet => {
+        let tweetMessage = tweet.text.includes('[') ?
+                            tweet.text.split('[')[1].split(']')[1] :
+                            tweet.text;
+
+        let tweetProject = tweet.text.includes('[') ? 
+                            tweet.text.split('[')[1].split(']')[0] :
+                            '';
         mappedMessages.push(
             {
-                name: item.user,
-                message: item.text,
-                project: item.team,  // ALTERAR!!!!
-                date: item.ts       // ALTERAR!!!
+                name: tweet.user,
+                message: tweetMessage,
+                project: tweetProject,
+                date: tweet.ts       // ALTERAR!!!
             });
     });
     return mappedMessages;
