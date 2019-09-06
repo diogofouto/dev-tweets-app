@@ -4,18 +4,31 @@ import { endpoint, token, channel } from '../../constants';
 
 
 const mapMessages = (messages) => {
-    mappedMessages = [];
 
-    const splitMessage = (text, message_project) => {
+    const splitMessageProject = (text, message_project) => {
         let newMessage = '';
 
         if (message_project == 'message') {
-            newMessage = text.includes('[') ? text.split('[')[1].split(']')[1] : text;
+            newMessage = text.split('[')[1].split(']')[1];
 
         } else if (message_project == 'project') {
-            newMessage = text.includes('[') ? text.split('[')[1].split(']')[0] : text;
+            newMessage = text.split('[')[1].split(']')[0];
         }
         return newMessage;
+    };
+
+    const joinMessages = (messages) => {
+        let joinedMessages = messages;
+
+        for (var i = 0; i < joinedMessages.length; i++) {
+            // Se nao tiver projeto:
+            if (joinedMessages[i].text[0] != '[') {
+
+                joinedMessages[i+1].text+=`\n${joinedMessages[i]}`;
+                joinedMessages.splice(i, 1);
+            }
+        }
+        return joinedMessages;
     };
 
     const timestampToDate = (timestamp) => {
@@ -25,17 +38,17 @@ const mapMessages = (messages) => {
         var month = months[tempDate.getMonth()];
         var date = tempDate.getDate();
         var hour = tempDate.getHours();
-        var min = tempDate.getMinutes();
-        var sec = tempDate.getSeconds();
-        return (date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec);
+        var min = tempDate.getMinutes()
+        return (date + ' ' + month + ' ' + year + '  ' + hour + 'h' + min);
     };
-
-    messages.forEach(tweet => {
+    
+    mappedMessages = [];
+    joinMessages(messages).forEach(tweet => {
         mappedMessages.push(
             {
                 name: tweet.user,
-                message: splitMessage(tweet.text, 'message'),
-                project: splitMessage(tweet.text, 'project'),
+                message: splitMessageProject(tweet.text, 'message'),
+                project: splitMessageProject(tweet.text, 'project'),
                 date: timestampToDate(tweet.ts)
             });
     });
