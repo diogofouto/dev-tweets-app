@@ -2,12 +2,23 @@ import React from "react";
 import { StyleSheet } from 'react-native';
 import { Card, CardItem, Thumbnail, Text, Left, Right, Body } from 'native-base';
 
-const TweetCard = ({ profilePhoto, name, message, project, date }) => {
+const TweetMessage = ({ message, limited=true} ) => {
+  if (limited) {
+    const delimitator = message.length > 300? '...' : '';
+    const newMessage = message.substring(0, 300);
+    return <Text>{newMessage} {delimitator}</Text>
+  }
+  else {
+    return <Text>{message}</Text>
+  }
+}
+
+const TweetCard = ({ avatar, name, message, project, date, limited=true }) => {
     return (
       <Card>
         <CardItem header bordered>
           <Left>
-            {/* <Thumbnail style={styles.thumbnailStyle} source={{uri: profilePhoto}} /> */}
+            <Thumbnail style={styles.thumbnailStyle} source={{uri: avatar}} />
             <Body>
               <Text style={styles.textStyle}>{name}</Text>
             </Body>
@@ -15,7 +26,7 @@ const TweetCard = ({ profilePhoto, name, message, project, date }) => {
         </CardItem>
         <CardItem bordered>
           <Body>
-            <Text>{message}</Text>
+            <TweetMessage message={message} limited={limited}/>
           </Body>
         </CardItem>
         <CardItem footer bordered>

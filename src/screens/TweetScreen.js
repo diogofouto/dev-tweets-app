@@ -1,29 +1,35 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import TweetCard from '../components/TweetCard';
 
 const TweetScreen = ({ navigation }) => {
-    //const profilePhoto = navigation.getParam('profilePhoto');
+    const avatar = navigation.getParam('avatar');
     const name = navigation.getParam('name');
     const message = navigation.getParam('message');
     const project = navigation.getParam('project');
     const date = navigation.getParam('date');
 
     return (
-        <View>
-            <TweetCard
-                //profilePhoto={profilePhoto}
-                name={name}
-                message={message}
-                project={project}
-                date={date}
-            />
-        </View>
+        <ScrollView style={styles.viewMainStyle}>
+            <View style={styles.viewSecStyle}>
+                <TweetCard
+                    avatar={avatar}
+                    name={name}
+                    message={message}
+                    project={project}
+                    date={date}
+                    limited={false}
+                />
+            </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
-    viewStyle: {
+    viewMainStyle: {
+        backgroundColor: '#E0E0E0'
+    },
+    viewSecStyle: {
         margin:12
     }
 });

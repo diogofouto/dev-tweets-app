@@ -12,11 +12,11 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.viewMainStyle}>
-            {/* <View style={styles.viewSecStyle}> */}
+            <View style={styles.viewSecStyle}>
                 <Timeline 
                     data={messages}
                 />
-            {/* </View> */}
+            </View>
         </View>
     );
 };

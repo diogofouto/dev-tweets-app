@@ -7,12 +7,12 @@ const Timeline = ({ data, navigation }) => {
     return (
         <FlatList
             data={data}
-            keyExtractor={ tweet => tweet.ts }
+            keyExtractor={ tweet => tweet.message }
             renderItem={ ({ item }) => {
                 return ( 
                     <TouchableOpacity onPress={() =>
                         navigation.navigate('Tweet', 
-                            {//profilePhoto: item.profilePhoto, 
+                            {   avatar: item.avatar, 
                                 name: item.name, 
                                 message: item.message,
                                 project: item.project,
@@ -20,7 +20,7 @@ const Timeline = ({ data, navigation }) => {
                             })
                         }>
                         <TweetCard
-                            //profilePhoto={item.profilePhoto}
+                            avatar={item.avatar}
                             name={item.name}
                             message={item.message}
                             project={item.project}

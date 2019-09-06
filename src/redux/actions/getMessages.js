@@ -1,58 +1,76 @@
 import axios from 'axios';
 import { SET_MESSAGES } from '../types';
 import { endpoint, token, channel } from '../../constants';
+import users from '../../assets/users';
 
+const getTweetNameAndAvatar = (tempMessages) => {
+    const {name, avatar} = users[tempMessages[0].user];
+    return {name, avatar};
+}
 
-const mapMessages = (messages) => {
+const getTweetDate = (tempMessages) => {
+    const timestamp = tempMessages[0].ts;
+    var tempDate = new Date(timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = tempDate.getFullYear();
+    var month = months[tempDate.getMonth()];
+    var date = tempDate.getDate();
+    var hour = tempDate.getHours();
+    var min = tempDate.getMinutes()
+    return (date + ' ' + month + ' ' + year + '  ' + hour + 'h' + min);
+};
 
-    const splitMessageProject = (text, message_project) => {
-        let newMessage = '';
+const hasProjectTitle = (message) => {
+    return message.text[0] == '[';
+}
 
-        if (message_project == 'message') {
-            newMessage = text.split('[')[1].split(']')[1];
+const getTweetMessage = (tempMessages) => {
+    let tweetMessage = '';
 
-        } else if (message_project == 'project') {
-            newMessage = text.split('[')[1].split(']')[0];
-        }
-        return newMessage;
-    };
-
-    const joinMessages = (messages) => {
-        let joinedMessages = messages;
-
-        for (var i = 0; i < joinedMessages.length; i++) {
-            // Se nao tiver projeto:
-            if (joinedMessages[i].text[0] != '[') {
-
-                joinedMessages[i+1].text+=`\n${joinedMessages[i]}`;
-                joinedMessages.splice(i, 1);
-            }
-        }
-        return joinedMessages;
-    };
-
-    const timestampToDate = (timestamp) => {
-        var tempDate = new Date(timestamp * 1000);
-        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        var year = tempDate.getFullYear();
-        var month = months[tempDate.getMonth()];
-        var date = tempDate.getDate();
-        var hour = tempDate.getHours();
-        var min = tempDate.getMinutes()
-        return (date + ' ' + month + ' ' + year + '  ' + hour + 'h' + min);
-    };
-    
-    mappedMessages = [];
-    joinMessages(messages).forEach(tweet => {
-        mappedMessages.push(
-            {
-                name: tweet.user,
-                message: splitMessageProject(tweet.text, 'message'),
-                project: splitMessageProject(tweet.text, 'project'),
-                date: timestampToDate(tweet.ts)
-            });
+    tempMessages.reverse().forEach(tempMessage => {
+        tweetMessage += tempMessage.text;
     });
-    return mappedMessages;
+    return tweetMessage;
+}
+
+const getTweetProject = (message) => {
+    return message.split('[')[1].split(']')[0];
+}
+
+const getTweetMessageAndProject = (tempMessages) => {
+    let finalMessage = getTweetMessage(tempMessages);
+    const project = getTweetProject(finalMessage);
+    finalMessage = finalMessage.replace(`[${project}]`, '');
+    return {finalMessage, project};
+}
+
+const processTweet = (tempMessages) => {
+    const {name, avatar} = getTweetNameAndAvatar(tempMessages);
+    const {finalMessage, project} = getTweetMessageAndProject(tempMessages);
+    const tweet = {
+        name: name,
+        message: finalMessage,
+        date: getTweetDate(tempMessages),
+        project: project,
+        avatar: avatar
+    };
+    return tweet;
+} 
+
+const getDevTweets = (messages) => {
+    let tempMessages = [];
+    let tweets = [];
+
+    messages.forEach(message => {
+        tempMessages.push(message);
+        const hasTitle = hasProjectTitle(message);
+        if (hasTitle) {
+            const tweet = processTweet(tempMessages);
+            tweets.push(tweet);
+            tempMessages = [];
+        }
+    });
+    return tweets;
 }
 
 const getMessages = () => {
@@ -61,7 +79,7 @@ const getMessages = () => {
         .then(response => {
             dispatch({
                 type: SET_MESSAGES,
-                messages: mapMessages(response.data.messages)
+                messages: getDevTweets(response.data.messages)
             });   
         })
     }
